@@ -33,9 +33,9 @@ internal class HwNotchScreenSupport : INotchScreenSupport {
             }
             val get = hwNotchSizeUtil!!.getMethod("getNotchSize")
             val ret = get.invoke(null) as IntArray
-            rect.left = ret[0]
+            rect.left = (context.resources.displayMetrics.widthPixels - ret[0]) / 2
             rect.bottom = ret[1]
-            rect.right = context.resources.displayMetrics.widthPixels - rect.left
+            rect.right = rect.left + ret[0]
             rect.top = 0
             result.add(rect)
             return result
