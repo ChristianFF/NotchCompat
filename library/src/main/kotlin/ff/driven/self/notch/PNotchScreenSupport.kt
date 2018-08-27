@@ -11,7 +11,7 @@ import java.util.*
  * Contacts me:404619986@qq.com
  */
 internal class PNotchScreenSupport : INotchScreenSupport {
-    @RequiresApi(api = 28)
+    @RequiresApi(api = Build.VERSION_CODES.P)
     override fun hasNotchInScreen(window: Window): Boolean {
         val decorView = window.decorView
         val windowInsets = decorView.rootWindowInsets ?: return false
@@ -22,7 +22,7 @@ internal class PNotchScreenSupport : INotchScreenSupport {
             || dct.safeInsetRight != 0)
     }
 
-    @RequiresApi(api = 28)
+    @RequiresApi(api = Build.VERSION_CODES.P
     override fun getNotchSize(window: Window): List<Rect> {
         val result = ArrayList<Rect>()
         val decorView = window.decorView
@@ -34,14 +34,14 @@ internal class PNotchScreenSupport : INotchScreenSupport {
         return result
     }
 
-    @RequiresApi(api = 28)
+    @RequiresApi(api = Build.VERSION_CODES.P)
     override fun setWindowLayoutAroundNotch(window: Window) {
         val attributes = window.attributes
         attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         window.attributes = attributes
     }
 
-    @RequiresApi(api = 28)
+    @RequiresApi(api = Build.VERSION_CODES.P)
     override fun setWindowLayoutBlockNotch(window: Window) {
         val attributes = window.attributes
         attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER

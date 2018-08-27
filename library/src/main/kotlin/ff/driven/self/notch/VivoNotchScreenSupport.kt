@@ -14,7 +14,7 @@ import java.util.*
  */
 internal class VivoNotchScreenSupport : INotchScreenSupport {
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun hasNotchInScreen(window: Window): Boolean {
         return try {
             if (vivoFtFeature == null) {
@@ -29,7 +29,7 @@ internal class VivoNotchScreenSupport : INotchScreenSupport {
     }
 
     //vivo刘海大小固定
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun getNotchSize(window: Window): List<Rect> {
         val result = ArrayList<Rect>()
         val rect = Rect()
@@ -44,7 +44,7 @@ internal class VivoNotchScreenSupport : INotchScreenSupport {
         return result
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutAroundNotch(window: Window) {
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -54,7 +54,7 @@ internal class VivoNotchScreenSupport : INotchScreenSupport {
         window.decorView.systemUiVisibility = systemUiVisibility
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutBlockNotch(window: Window) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

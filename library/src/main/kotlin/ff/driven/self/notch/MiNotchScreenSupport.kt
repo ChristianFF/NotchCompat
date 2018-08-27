@@ -12,7 +12,7 @@ import java.util.*
  */
 internal class MiNotchScreenSupport : INotchScreenSupport {
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun hasNotchInScreen(window: Window): Boolean {
         return try {
             "1" == SystemProperties["ro.miui.notch", null]
@@ -22,7 +22,7 @@ internal class MiNotchScreenSupport : INotchScreenSupport {
     }
 
     //小米的状态栏高度会略高于刘海屏的高度，因此通过获取状态栏的高度来间接避开刘海屏,宽度未知，直接返回了屏幕宽度
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun getNotchSize(window: Window): List<Rect> {
         val result = ArrayList<Rect>()
 
@@ -37,7 +37,7 @@ internal class MiNotchScreenSupport : INotchScreenSupport {
         return result
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutAroundNotch(window: Window) {
         val flag = FLAG_NOTCH_IMMERSIVE or FLAG_NOTCH_PORTRAIT or FLAG_NOTCH_LANDSCAPE
         try {
@@ -47,7 +47,7 @@ internal class MiNotchScreenSupport : INotchScreenSupport {
         }
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutBlockNotch(window: Window) {
         val flag = FLAG_NOTCH_IMMERSIVE or FLAG_NOTCH_PORTRAIT or FLAG_NOTCH_LANDSCAPE
         try {

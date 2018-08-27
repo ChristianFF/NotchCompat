@@ -13,7 +13,7 @@ import java.util.*
  */
 internal class OppoNotchScreenSupport : INotchScreenSupport {
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun hasNotchInScreen(window: Window): Boolean {
         return try {
             window.context.packageManager
@@ -24,7 +24,7 @@ internal class OppoNotchScreenSupport : INotchScreenSupport {
     }
 
     //目前Oppo刘海屏机型尺寸规格都是统一的,显示屏宽度为1080px，高度为2280px,刘海区域宽度为324px, 高度为80px
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun getNotchSize(window: Window): List<Rect> {
         val result = ArrayList<Rect>()
         val context = window.context
@@ -40,7 +40,7 @@ internal class OppoNotchScreenSupport : INotchScreenSupport {
         return result
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutAroundNotch(window: Window) {
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -50,7 +50,7 @@ internal class OppoNotchScreenSupport : INotchScreenSupport {
         window.decorView.systemUiVisibility = systemUiVisibility
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutBlockNotch(window: Window) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

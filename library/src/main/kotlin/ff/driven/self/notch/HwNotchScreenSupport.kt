@@ -7,7 +7,7 @@ import java.lang.reflect.Field
 import java.util.*
 
 internal class HwNotchScreenSupport : INotchScreenSupport {
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun hasNotchInScreen(window: Window): Boolean {
         return try {
             if (hwNotchSizeUtil == null) {
@@ -21,7 +21,7 @@ internal class HwNotchScreenSupport : INotchScreenSupport {
         }
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun getNotchSize(window: Window): List<Rect> {
         val result = ArrayList<Rect>()
         val rect = Rect()
@@ -44,7 +44,7 @@ internal class HwNotchScreenSupport : INotchScreenSupport {
         }
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutAroundNotch(window: Window) {
         val layoutParams = window.attributes
         try {
@@ -58,7 +58,7 @@ internal class HwNotchScreenSupport : INotchScreenSupport {
         }
     }
 
-    @RequiresApi(api = 26)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     override fun setWindowLayoutBlockNotch(window: Window) {
         val layoutParams = window.attributes
         try {

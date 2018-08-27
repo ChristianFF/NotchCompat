@@ -24,7 +24,6 @@ object NotchCompat {
      * 因此想要获得正确的结果，方法的调用时机应在DecorView Attach之后
      */
     fun hasDisplayCutout(window: Window): Boolean {
-        if (sdkVersionInvalid()) return false
         checkScreenSupportInit()
         return mNotchScreenSupport!!.hasNotchInScreen(window)
     }
@@ -33,7 +32,6 @@ object NotchCompat {
      * 获取凹口屏大小
      */
     fun getDisplayCutoutSize(window: Window): List<Rect> {
-        if (sdkVersionInvalid()) return ArrayList()
         checkScreenSupportInit()
         return mNotchScreenSupport!!.getNotchSize(window)
     }
@@ -42,7 +40,6 @@ object NotchCompat {
      * 设置始终使用凹口屏区域
      */
     fun immersiveDisplayCutout(window: Window) {
-        if (sdkVersionInvalid()) return
         checkScreenSupportInit()
         mNotchScreenSupport!!.setWindowLayoutAroundNotch(window)
     }
@@ -51,22 +48,15 @@ object NotchCompat {
      * 设置始终不使用凹口屏区域
      */
     fun blockDisplayCutout(window: Window) {
-        if (sdkVersionInvalid()) return
         checkScreenSupportInit()
         mNotchScreenSupport!!.setWindowLayoutBlockNotch(window)
-    }
-
-    /**
-     * 检查SDK INT
-     */
-    private fun sdkVersionInvalid(): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.O
     }
 
     private fun checkScreenSupportInit() {
         if (mNotchScreenSupport != null) return
         mNotchScreenSupport = when {
-            Build.VERSION.SDK_INT >= 28 -> PNotchScreenSupport()
+            Build.VERSION.SDK_INT < Build.VERSION_CODES.O->DefaultNotchScreenSupport()
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> PNotchScreenSupport()
             RomUtils.isMiuiRom -> MiNotchScreenSupport()
             RomUtils.isHuaweiRom -> HwNotchScreenSupport()
             RomUtils.isOppoRom -> OppoNotchScreenSupport()
