@@ -1,6 +1,7 @@
 package ff.driven.self.notch
 
 import android.graphics.Rect
+import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.Window
 import android.view.WindowManager
@@ -11,6 +12,7 @@ import java.util.*
  * Contacts me:404619986@qq.com
  */
 internal class PNotchScreenSupport : INotchScreenSupport {
+
     @RequiresApi(api = Build.VERSION_CODES.P)
     override fun hasNotchInScreen(window: Window): Boolean {
         val decorView = window.decorView
@@ -22,7 +24,7 @@ internal class PNotchScreenSupport : INotchScreenSupport {
             || dct.safeInsetRight != 0)
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.P
+    @RequiresApi(api = Build.VERSION_CODES.P)
     override fun getNotchSize(window: Window): List<Rect> {
         val result = ArrayList<Rect>()
         val decorView = window.decorView

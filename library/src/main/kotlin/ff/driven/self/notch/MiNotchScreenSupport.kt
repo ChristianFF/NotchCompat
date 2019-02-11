@@ -2,6 +2,7 @@ package ff.driven.self.notch
 
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.Window
 import java.util.*

@@ -1,6 +1,7 @@
 package ff.driven.self.notch
 
 import android.graphics.Rect
+import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.TypedValue
 import android.view.View
@@ -17,12 +18,12 @@ internal class VivoNotchScreenSupport : INotchScreenSupport {
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun hasNotchInScreen(window: Window): Boolean {
         return try {
-            if (vivoFtFeature == null) {
+            if (mVivoFtFeature == null) {
                 val cl = window.context.classLoader
-                vivoFtFeature = cl.loadClass("android.util.FtFeature")
+                mVivoFtFeature = cl.loadClass("android.util.FtFeature")
             }
-            val get = vivoFtFeature!!.getMethod("isFeatureSupport", Int::class.javaPrimitiveType)
-            get.invoke(vivoFtFeature, VIVO_HAS_NOTCH_DISPLAY) as Boolean
+            val get = mVivoFtFeature!!.getMethod("isFeatureSupport", Int::class.javaPrimitiveType)
+            get.invoke(mVivoFtFeature, VIVO_HAS_NOTCH_DISPLAY) as Boolean
         } catch (e: Exception) {
             false
         }
@@ -65,7 +66,7 @@ internal class VivoNotchScreenSupport : INotchScreenSupport {
     }
 
     companion object {
-        private var vivoFtFeature: Class<*>? = null
+        private var mVivoFtFeature: Class<*>? = null
         //表示是否有凹槽
         private const val VIVO_HAS_NOTCH_DISPLAY = 0x00000020
     }

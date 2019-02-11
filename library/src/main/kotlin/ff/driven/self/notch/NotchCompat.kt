@@ -7,7 +7,6 @@ package ff.driven.self.notch
 import android.graphics.Rect
 import android.os.Build
 import android.view.Window
-import java.util.*
 
 /**
  * 凹口屏适配工具类
@@ -28,12 +27,22 @@ object NotchCompat {
         return mNotchScreenSupport!!.hasNotchInScreen(window)
     }
 
+    fun hasDisplayCutoutHardware(window: Window): Boolean {
+        checkScreenSupportInit()
+        return mNotchScreenSupport!!.hasNotchInScreenHardware(window)
+    }
+
     /**
      * 获取凹口屏大小
      */
     fun getDisplayCutoutSize(window: Window): List<Rect> {
         checkScreenSupportInit()
         return mNotchScreenSupport!!.getNotchSize(window)
+    }
+
+    fun getDisplayCutoutSizeHardware(window: Window): List<Rect> {
+        checkScreenSupportInit()
+        return mNotchScreenSupport!!.getNotchSizeHardware(window)
     }
 
     /**
@@ -55,12 +64,14 @@ object NotchCompat {
     private fun checkScreenSupportInit() {
         if (mNotchScreenSupport != null) return
         mNotchScreenSupport = when {
-            Build.VERSION.SDK_INT < Build.VERSION_CODES.O->DefaultNotchScreenSupport()
+            Build.VERSION.SDK_INT < Build.VERSION_CODES.O -> DefaultNotchScreenSupport()
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> PNotchScreenSupport()
             RomUtils.isMiuiRom -> MiNotchScreenSupport()
             RomUtils.isHuaweiRom -> HwNotchScreenSupport()
             RomUtils.isOppoRom -> OppoNotchScreenSupport()
             RomUtils.isVivoRom -> VivoNotchScreenSupport()
+            RomUtils.isMeizuRom -> MeizuNotchScreenSupport()
+            RomUtils.isSamsungRom -> SamsungNotchScreenSupport()
             else -> DefaultNotchScreenSupport()
         }
     }
